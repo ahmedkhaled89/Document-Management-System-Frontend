@@ -20,11 +20,10 @@ export default function Register() {
         password,
       })
       .then((result) => {
-        console.log(result);
-
-        window.location.pathname = '/comingSoon';
+        window.localStorage.setItem('token', result.data.token);
+        window.location.pathname = '/';
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.log(e.response.data));
   };
   return (
     <>
@@ -60,16 +59,16 @@ export default function Register() {
             name='email'
             onChange={(e) => setEmail(e.target.value)}
           />
-          <div>
-            <label htmlFor='password'>password: </label>
-            <input
-              id='password'
-              name='password'
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button type='submit'>Register</button>
         </div>
+        <div>
+          <label htmlFor='password'>password: </label>
+          <input
+            id='password'
+            name='password'
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button type='submit'>Register</button>
       </form>
     </>
   );
