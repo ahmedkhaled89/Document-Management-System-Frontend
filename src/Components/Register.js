@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const PORT = 4000;
 export default function Register() {
@@ -8,6 +9,9 @@ export default function Register() {
   const [nationalID, setNationalID] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // Navigate
+  const navigate = useNavigate();
 
   const handelSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +25,7 @@ export default function Register() {
       })
       .then((result) => {
         window.localStorage.setItem('token', result.data.token);
-        window.location.pathname = '/';
+        navigate('/');
       })
       .catch((e) => console.log(e.response.data));
   };
